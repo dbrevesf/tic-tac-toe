@@ -23,20 +23,28 @@ def getPlayerMark(player, board):
     mark = raw_input()
     exit = False
     while True:
-        if int(mark) in range(1,9):
-            break
+        if int(mark) in range(1,10):
+            if(setPlayerMark(player, mark, board)):
+                drawBoard(board)
+                break
+            else:
+                print "Wrong input! Please, select a free place"
+                mark = raw_input()
         else:
             print "Wrong input! Please, select an input between 1 and 9"
             mark = raw_input()
-    setPlayerMark(player, mark, board)
-    drawBoard(board)
 
 def setPlayerMark(player, mark, board):
     hashtableMarks = {"1": [0,0],"2":[0,1], "3":[0,2],
                       "4": [1,0],"5":[1,1], "6":[1,2],
                       "7": [2,0],"8":[2,1], "9":[2,2]}
     coordinates = hashtableMarks[str(mark)]
-    board[coordinates[0]][coordinates[1]] = player
+    if(board[coordinates[0]][coordinates[1]] == "_"):
+        board[coordinates[0]][coordinates[1]] = player
+        return True
+    else:
+        return False
+
 
 
 def checkBoard(player, board):
