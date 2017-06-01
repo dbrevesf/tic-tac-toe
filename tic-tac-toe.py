@@ -59,16 +59,12 @@ def checkBoard(player, board):
                 emptyCells += 1
     if emptyCells == 0:
         return "tie"
-    if board[0][0] == board[1][0] == board[2][0] == player['mark']:
-        return "win"
-    if board[0][1] == board[1][1] == board[2][1] == player['mark']:
-        return "win"
-    if board[0][2] == board[1][2] == board[2][2] == player['mark']:
-        return "win"
-    if board[0][0] == board[1][1] == board[2][2] == player['mark']:
-        return "win"
-    if board[0][2] == board[1][1] == board[2][0] == player['mark']:
-        return "win"
+    if  (board[0][0] == board[1][0] == board[2][0] == player['mark']) or \
+        (board[0][1] == board[1][1] == board[2][1] == player['mark']) or \
+        (board[0][2] == board[1][2] == board[2][2] == player['mark']) or \
+        (board[0][0] == board[1][1] == board[2][2] == player['mark']) or \
+        (board[0][2] == board[1][1] == board[2][0] == player['mark']):
+            return "win"
     return "game on"
 
 # The Game begins
@@ -82,7 +78,6 @@ while(finish == False):
     while(game == "game on"):
         getPlayerMark(players[0], board)
         game = checkBoard(players[0], board)
-        print "GAME RESULT: " + game
         if(game == "win"):
             print "%s WINS" % (players[0]['name'])
             break
